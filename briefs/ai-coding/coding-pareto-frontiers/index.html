@@ -1,0 +1,1270 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Evidence-tiered research briefs on AI engineering, productivity, and agent architecture">
+      
+      
+        <meta name="author" content="Gabor Melli">
+      
+      
+        <link rel="canonical" href="https://gmelli.github.io/intelligence-briefs/briefs/ai-coding/coding-pareto-frontiers/">
+      
+      
+        <link rel="prev" href="../../..">
+      
+      
+        <link rel="next" href="../coding-pareto-frontiers-summary/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Coding Accuracy vs. Inference Speed: The Three Pareto Frontiers - Intelligence Briefs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#coding-accuracy-vs-inference-speed-the-three-pareto-frontiers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Intelligence Briefs" class="md-header__button md-logo" aria-label="Intelligence Briefs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Intelligence Briefs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Coding Accuracy vs. Inference Speed: The Three Pareto Frontiers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/gmelli/intelligence-briefs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Intelligence Briefs" class="md-nav__button md-logo" aria-label="Intelligence Briefs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Intelligence Briefs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gmelli/intelligence-briefs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start Here
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Briefs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Briefs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Coding
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Coding
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Three Pareto Frontiers
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Three Pareto Frontiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-the-model-level-pareto-frontier-well-mapped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The Model-Level Pareto Frontier (Well-Mapped)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. The Model-Level Pareto Frontier (Well-Mapped)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coding-benchmark-leaderboard-february-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coding Benchmark Leaderboard (February 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#price-performance-champions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Price-Performance Champions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#live-frontier-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Live Frontier Tracking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-workflow-level-pareto-frontier-poorly-mapped-largest-research-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Workflow-Level Pareto Frontier (Poorly Mapped — Largest Research Gap)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The Workflow-Level Pareto Frontier (Poorly Mapped — Largest Research Gap)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-ai-speed-trap-pattern-documented-by-6-independent-studies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The AI Speed Trap Pattern (Documented by 6+ Independent Studies)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-verification-tax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Verification Tax
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-unmapped-quadrant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Unmapped Quadrant
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metr-follow-up-february-17-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        METR Follow-Up (February 17, 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zvi-mowshowitz-critique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zvi Mowshowitz Critique
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-strategies-to-move-the-frontier-not-just-trade-along-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Strategies to Move the Frontier (Not Just Trade Along It)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Strategies to Move the Frontier (Not Just Trade Along It)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cascade-routing-iclr-2025-dekoninck-et-al" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cascade Routing (ICLR 2025 — Dekoninck et al.)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verification-first-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verification-First Workflows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adaptive-reasoning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adaptive Reasoning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scaling-law-awareness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scaling Law Awareness
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-emerging-quality-adjusted-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Emerging Quality-Adjusted Metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advisory-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advisory Assessment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advisory Assessment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-model-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Model Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-workflow-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Workflow Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-uncertainties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Uncertainties
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding-pareto-frontiers-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methodology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="coding-accuracy-vs-inference-speed-the-three-pareto-frontiers">Coding Accuracy vs. Inference Speed: The Three Pareto Frontiers<a class="headerlink" href="#coding-accuracy-vs-inference-speed-the-three-pareto-frontiers" title="Permanent link">&para;</a></h1>
+<p><strong>Date</strong>: 2026-02-23
+<strong>Sources</strong>: Artificial Analysis (Feb 2026), METR RCT (Jul 2025) + Transcript Analysis (Feb 2026), CodeRabbit State of Code Quality (Dec 2025), Sonar 2026 Developer Survey (Jan 2026), Harness AI Velocity Paradox (Sep 2025), DORA 2025, Uplevel Copilot Study (2024), GitClear 2025, Greptile State of AI Coding 2025, Aider Polyglot Leaderboard, SWE-bench Verified (Feb 2026), LiveCodeBench (Feb 2026), Terminal-Bench 2.0 (Feb 2026), Dekoninck et al. ICLR 2025 (Cascade Routing), Stanford HAI AI Index 2025, BAMBO arXiv:2512.09972
+<strong>Evidence Tier</strong>: 1 (METR pre-registered RCT, ICLR 2025 peer-reviewed, NIST/Stanford/DORA institutional reports, BLS data) + Tier 2 (industry surveys n&gt;800) + Tier 3 (benchmark leaderboards, practitioner reports)</p>
+<hr />
+<p>This brief examines three nested optimization problems in AI-assisted coding: model selection (well-mapped by benchmarks), workflow design (poorly mapped, the largest research gap), and organizational productivity (emerging). The evidence reveals that industry investment overwhelmingly targets model selection while workflow design offers larger returns.</p>
+<hr />
+<h2 id="1-the-model-level-pareto-frontier-well-mapped">1. The Model-Level Pareto Frontier (Well-Mapped)<a class="headerlink" href="#1-the-model-level-pareto-frontier-well-mapped" title="Permanent link">&para;</a></h2>
+<h3 id="coding-benchmark-leaderboard-february-2026">Coding Benchmark Leaderboard (February 2026)<a class="headerlink" href="#coding-benchmark-leaderboard-february-2026" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>SWE-bench V</th>
+<th>LiveCodeBench</th>
+<th>Terminal-Bench 2.0</th>
+<th>Aider Polyglot</th>
+<th style="text-align: right;">Output t/s</th>
+<th style="text-align: right;">$/M Input</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Opus 4.5</td>
+<td><strong>80.9%</strong></td>
+<td>~87%</td>
+<td>58.4%</td>
+<td><strong>89.4%</strong></td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">$5.00</td>
+</tr>
+<tr>
+<td>Claude Opus 4.6</td>
+<td>80.8%</td>
+<td>—</td>
+<td>65.4%</td>
+<td>—</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">$5.00</td>
+</tr>
+<tr>
+<td>GPT-5.2</td>
+<td>80.0%</td>
+<td><strong>89%</strong></td>
+<td>—</td>
+<td>88.0% (thinking)</td>
+<td style="text-align: right;">~187</td>
+<td style="text-align: right;">~$5.00</td>
+</tr>
+<tr>
+<td>GPT-5.3 Codex</td>
+<td>—</td>
+<td>—</td>
+<td><strong>77.3%</strong></td>
+<td>—</td>
+<td style="text-align: right;">~62</td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr>
+<td>Gemini 3.1 Pro</td>
+<td>—</td>
+<td><strong>91.7%</strong></td>
+<td><strong>67.4%</strong></td>
+<td>—</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;"><strong>$2.00</strong></td>
+</tr>
+<tr>
+<td>Gemini 3 Pro</td>
+<td>76.2%</td>
+<td>—</td>
+<td>55.1%</td>
+<td>82.2%</td>
+<td style="text-align: right;"><strong>257</strong></td>
+<td style="text-align: right;">$2.00</td>
+</tr>
+<tr>
+<td>Claude Sonnet 4.5</td>
+<td>77.2%</td>
+<td>—</td>
+<td>—</td>
+<td>82.4%</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">$3.00</td>
+</tr>
+<tr>
+<td>Claude Sonnet 4.6</td>
+<td>—</td>
+<td>—</td>
+<td>59.6%</td>
+<td>—</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">~$1.20</td>
+</tr>
+<tr>
+<td>DeepSeek V3.2</td>
+<td>73.1%</td>
+<td>89.6%</td>
+<td>—</td>
+<td>—</td>
+<td style="text-align: right;">~40</td>
+<td style="text-align: right;"><strong>$0.03</strong></td>
+</tr>
+<tr>
+<td>GLM-4.7/5</td>
+<td>77.8%</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">$0.05</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key finding</strong>: No single model wins across all benchmarks. Claude Opus leads SWE-bench (80.9%) but underperforms on Terminal-Bench (58.4%). Gemini leads LiveCodeBench (91.7%) and Terminal-Bench (67.4%) but trails on SWE-bench (76.2%). The frontier is multi-dimensional (accuracy x speed x cost x task-type).</p>
+<h3 id="price-performance-champions">Price-Performance Champions<a class="headerlink" href="#price-performance-champions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Budget frontier</strong>: DeepSeek V3.2 at $0.03/M input — 73% SWE-bench at ~1/170th the cost of Opus</li>
+<li><strong>Mid-tier frontier</strong>: Gemini 3.1 Pro at $2.00/M — leads most benchmarks, 7.5x cheaper than Opus</li>
+<li><strong>Accuracy ceiling</strong>: Claude Opus 4.5/4.6 — 80.9% SWE-bench, premium pricing</li>
+</ul>
+<h3 id="live-frontier-tracking">Live Frontier Tracking<a class="headerlink" href="#live-frontier-tracking" title="Permanent link">&para;</a></h3>
+<p>Multiple projects explicitly map the LLM pareto frontier: Winston Bosan's live visualization (winston-bosan.github.io/llm-pareto-frontier/), Artificial Analysis Intelligence Index v4.0 (25% coding weight), and BAMBO (arXiv:2512.09972) which uses Bayesian optimization to construct provably optimal pareto sets.</p>
+<hr />
+<h2 id="2-the-workflow-level-pareto-frontier-poorly-mapped-largest-research-gap">2. The Workflow-Level Pareto Frontier (Poorly Mapped — Largest Research Gap)<a class="headerlink" href="#2-the-workflow-level-pareto-frontier-poorly-mapped-largest-research-gap" title="Permanent link">&para;</a></h2>
+<h3 id="the-ai-speed-trap-pattern-documented-by-6-independent-studies">The AI Speed Trap Pattern (Documented by 6+ Independent Studies)<a class="headerlink" href="#the-ai-speed-trap-pattern-documented-by-6-independent-studies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Study</th>
+<th>Speed Metric</th>
+<th>Quality Metric</th>
+<th>Net Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>METR RCT (2025, n=16, pre-registered)</td>
+<td>Perceived +20%</td>
+<td>Actual -19% wall-clock</td>
+<td><strong>Negative</strong></td>
+</tr>
+<tr>
+<td>Uplevel (2024, n=800, before/after)</td>
+<td>No cycle time change</td>
+<td>+41% bug rate</td>
+<td><strong>Negative</strong></td>
+</tr>
+<tr>
+<td>CodeRabbit (2025, n=470 PRs)</td>
+<td>+20% PRs/author/yr</td>
+<td>1.7x issues per PR</td>
+<td><strong>Ambiguous</strong></td>
+</tr>
+<tr>
+<td>Harness (2025, n=900 survey)</td>
+<td>63% ship faster</td>
+<td>72% had AI production incidents</td>
+<td><strong>Negative net</strong></td>
+</tr>
+<tr>
+<td>DORA 2025</td>
+<td>90% using AI tools</td>
+<td>-7.2% delivery stability per 25% adoption</td>
+<td><strong>Destabilizing</strong></td>
+</tr>
+<tr>
+<td>GitClear (2025, 211M LoC)</td>
+<td>More code produced</td>
+<td>Code churn nearly doubled since 2020</td>
+<td><strong>Negative</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The pattern: (1) Optimize for speed → (2) Perceive +20% gain → (3) Actual throughput neutral-to-negative → (4) Quality degrades 41-70% → (5) Downstream costs escalate → (6) Net Pareto-inferior to careful human coding.</p>
+<h3 id="the-verification-tax">The Verification Tax<a class="headerlink" href="#the-verification-tax" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Review time increase for AI code</td>
+<td>+91%</td>
+<td>DORA 2025</td>
+</tr>
+<tr>
+<td>PR size increase</td>
+<td>+154% average</td>
+<td>DORA 2025</td>
+</tr>
+<tr>
+<td>Devs who say AI review &gt; human review effort</td>
+<td>38%</td>
+<td>Sonar 2026 (n=1,100)</td>
+</tr>
+<tr>
+<td>Devs who DON'T trust AI code</td>
+<td>96%</td>
+<td>Sonar 2026</td>
+</tr>
+<tr>
+<td>Devs who ALWAYS verify anyway</td>
+<td>Only 48%</td>
+<td>Sonar 2026</td>
+</tr>
+<tr>
+<td>AI code: 42% of all committed code</td>
+<td>—</td>
+<td>Sonar 2026</td>
+</tr>
+<tr>
+<td>Production incidents from AI code</td>
+<td>72% of orgs</td>
+<td>Harness 2025</td>
+</tr>
+<tr>
+<td>Hidden defects surface after</td>
+<td>30-90 days</td>
+<td>CodeRabbit / Codebridge</td>
+</tr>
+</tbody>
+</table>
+<p>AWS CTO Werner Vogels: "When you write code yourself, comprehension comes with creation. When the machine writes it, you must rebuild that comprehension during review." This makes the verification cost partly <strong>structural</strong>, not solely model-quality-dependent.</p>
+<h3 id="the-unmapped-quadrant">The Unmapped Quadrant<a class="headerlink" href="#the-unmapped-quadrant" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Low Quality</th>
+<th>High Quality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>High Speed</strong></td>
+<td>Well-studied (METR, Uplevel, Harness) — net negative</td>
+<td><strong>NOT YET STUDIED</strong></td>
+</tr>
+<tr>
+<td><strong>Low Speed</strong></td>
+<td>Not relevant</td>
+<td>Baseline human performance</td>
+</tr>
+</tbody>
+</table>
+<p>The entire evidence base describes speed-optimized or unstructured AI use. No study has measured the quality-optimized configuration (slower models, mandatory verification, multi-agent review). The quality-first AI-assisted quadrant is the single largest research gap in the field.</p>
+<h3 id="metr-follow-up-february-17-2026">METR Follow-Up (February 17, 2026)<a class="headerlink" href="#metr-follow-up-february-17-2026" title="Permanent link">&para;</a></h3>
+<p>METR transcript analysis of 5,305 Claude Code transcripts found 1.5-13x time savings on self-selected tasks — but with critical caveats: selection bias (developers choose tasks where AI helps), the time savings factor "does not equal the productivity multiplier," and the original RCT's serial task design may understate AI's concurrency benefits. No replication of the original RCT has been published.</p>
+<h3 id="zvi-mowshowitz-critique">Zvi Mowshowitz Critique<a class="headerlink" href="#zvi-mowshowitz-critique" title="Permanent link">&para;</a></h3>
+<p>Key limitations of the METR RCT: deeply-understood open-source repos are worst-case for AI tools; 1-2 hour pre-decomposed tasks limit flexibility; hourly pay reduces efficiency incentives; developers lacked tool experience. Conclusion: the -19% may be specific to study conditions rather than a general indictment.</p>
+<hr />
+<h2 id="3-strategies-to-move-the-frontier-not-just-trade-along-it">3. Strategies to Move the Frontier (Not Just Trade Along It)<a class="headerlink" href="#3-strategies-to-move-the-frontier-not-just-trade-along-it" title="Permanent link">&para;</a></h2>
+<h3 id="cascade-routing-iclr-2025-dekoninck-et-al">Cascade Routing (ICLR 2025 — Dekoninck et al.)<a class="headerlink" href="#cascade-routing-iclr-2025-dekoninck-et-al" title="Permanent link">&para;</a></h3>
+<p>Unifies routing (single model per query) and cascading (sequential escalation) into a theoretically optimal strategy:
+- 50x cost savings possible (Haiku vs. Opus)
+- 16x efficiency for code generation vs. naive cascading
+- 5x+ cost savings with reliable judges at negligible quality loss
+- Not Diamond router: +25% accuracy, -10x cost via pareto-optimized routing</p>
+<p><strong>Practical three-tier pattern</strong>: Haiku/Flash for 80% of tasks, Sonnet for 15%, Opus for 5%.</p>
+<h3 id="verification-first-workflows">Verification-First Workflows<a class="headerlink" href="#verification-first-workflows" title="Permanent link">&para;</a></h3>
+<p>Only demonstrated technique for converting AI speed into net quality improvement:
+- Spotify Honk: LLM Judge vetoes ~25% of sessions
+- Multi-agent review: "one writes, another critiques, another tests, another validates"
+- SonarQube users: 24% lower vulnerability rates, 20% lower defect rates</p>
+<h3 id="adaptive-reasoning">Adaptive Reasoning<a class="headerlink" href="#adaptive-reasoning" title="Permanent link">&para;</a></h3>
+<p>Right amount of thinking per task:
+- Claude Sonnet 4.6 adaptive: ~2s simple, extended thinking for complex
+- GPT-5.1 adaptive: ~2s simple, 10s+ complex, 50% fewer tokens at similar quality
+- Agentic wrappers: Refact.ai boosted Claude 3.7 from 76.4% to 92.9% on Aider (+16.5pp), a larger gain than switching to a more expensive model</p>
+<h3 id="scaling-law-awareness">Scaling Law Awareness<a class="headerlink" href="#scaling-law-awareness" title="Permanent link">&para;</a></h3>
+<p>Code generation scales at N^0.35 with diminishing returns at 34B+ parameters (ICLR 2025). Primary bottleneck is data availability, not model size. Mid-tier models deliver ~90% of frontier quality — the last 10% costs 3-10x more.</p>
+<hr />
+<h2 id="4-emerging-quality-adjusted-metrics">4. Emerging Quality-Adjusted Metrics<a class="headerlink" href="#4-emerging-quality-adjusted-metrics" title="Permanent link">&para;</a></h2>
+<p>No single "correct-lines-per-hour" metric has achieved standard adoption. Emerging frameworks:</p>
+<ul>
+<li><strong>CTS-SW (Cost to Serve Software)</strong>: Total delivery cost including rework, incidents, review overhead</li>
+<li><strong>DORA rework rate</strong>: Added as 5th DORA metric in 2025 specifically for AI-code instability</li>
+<li><strong>Faros 5-dimension framework</strong>: Velocity + Quality + Security + Flow + Satisfaction</li>
+<li><strong>CodeRabbit 2026 targets</strong>: Churn &lt;10%, coverage &gt;80%, complexity &lt;15, defect density &lt;1%</li>
+</ul>
+<p>Industry framing shift: CodeRabbit titled their 2026 outlook "2025 was the year of AI speed. 2026 will be the year of AI quality."</p>
+<hr />
+<h2 id="advisory-assessment">Advisory Assessment<a class="headerlink" href="#advisory-assessment" title="Permanent link">&para;</a></h2>
+<h3 id="for-model-selection">For Model Selection<a class="headerlink" href="#for-model-selection" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>No single best model exists.</strong> Task-specific evaluation is mandatory — Claude Opus leads real-world SWE, Gemini leads competitive coding, GPT-5.3 Codex leads terminal tasks.</li>
+<li><strong>Cascade routing is the optimal strategy</strong> for the model frontier (ICLR 2025). The 80/20 rule: 80% of tasks can use cheap/fast models.</li>
+<li><strong>Gemini 3.1 Pro is the current price-performance champion</strong> — 7.5x cheaper than Opus with competitive scores.</li>
+</ol>
+<h3 id="for-workflow-design">For Workflow Design<a class="headerlink" href="#for-workflow-design" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>The workflow frontier matters more than the model frontier.</strong> Verification-first workflows are the only demonstrated technique for net-positive quality-adjusted throughput.</li>
+<li><strong>The "quality-first AI-assisted" quadrant is unstudied.</strong> This is the largest research gap in the field and the highest-value area for organizational investment.</li>
+<li><strong>Quantization degrades coding disproportionately</strong> — 5-10% accuracy loss, especially on reasoning-heavy tasks and low-resource languages.</li>
+</ol>
+<h3 id="key-uncertainties">Key Uncertainties<a class="headerlink" href="#key-uncertainties" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Whether the METR -19% result replicates with experienced tool users on newer models</li>
+<li>Whether the 1.7x defect rate improves with Feb 2026 models (no data yet)</li>
+<li>The magnitude of quality improvement from multi-agent review architectures</li>
+<li>Whether CTS-SW or similar composite metrics gain standard adoption</li>
+</ul>
+<p><strong>Confidence</strong>: High (evidence synthesis), Medium (predictive claims)
+<strong>Would change if</strong>: Quality-optimized AI workflow studies are published; newer models demonstrably reduce defect rates; METR RCT replicated with experienced users</p>
+<hr />
+<h2 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Type</th>
+<th>Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>METR 2025 — AI Developer Productivity RCT</td>
+<td>Pre-registered RCT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>METR Feb 2026 — Transcript Analysis</td>
+<td>Exploratory analysis</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Dekoninck et al. ICLR 2025 — Cascade Routing</td>
+<td>Peer-reviewed</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Stanford HAI AI Index 2025</td>
+<td>Institutional report</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Google DORA 2025 Report</td>
+<td>Institutional report</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Sonar 2026 Developer Survey (n=1,100)</td>
+<td>Industry survey</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Harness AI Velocity Paradox (n=900)</td>
+<td>Industry survey</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Uplevel Copilot Study (n=800)</td>
+<td>Industry research</td>
+<td>2</td>
+</tr>
+<tr>
+<td>CodeRabbit State of Code Quality (n=470 PRs)</td>
+<td>Industry report</td>
+<td>3</td>
+</tr>
+<tr>
+<td>GitClear 2025 (211M LoC)</td>
+<td>Industry research</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Greptile State of AI Coding 2025</td>
+<td>Industry report</td>
+<td>3</td>
+</tr>
+<tr>
+<td>SWE-bench Verified / LiveCodeBench / Aider</td>
+<td>Benchmark leaderboards</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Artificial Analysis Feb 2026</td>
+<td>Benchmark analysis</td>
+<td>3</td>
+</tr>
+<tr>
+<td>BAMBO arXiv:2512.09972</td>
+<td>Preprint</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Zvi Mowshowitz METR Critique</td>
+<td>Expert analysis</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Evidence quality</strong>: 25% Tier 1, 45% Tier 2, 30% Tier 3</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "toc.integrate", "search.suggest"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
