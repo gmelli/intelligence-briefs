@@ -23,6 +23,9 @@ nav:
     - AI Coding:
       - "The Three Pareto Frontiers": briefs/ai-coding/coding-pareto-frontiers.md
       - "Executive Summary": briefs/ai-coding/coding-pareto-frontiers-summary.md
+    - AI Learning:
+      - "Socratic Method in AI-Assisted SE": briefs/ai-learning/socratic-method-ai-software-engineering.md
+      - "Executive Summary": briefs/ai-learning/socratic-method-summary.md
   - Methodology: methodology.md
   - About: about.md
 
