@@ -2,22 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://gmelli.github.io/intelligence-briefs/</loc>
-         <lastmod>2026-02-24</lastmod>
+         <lastmod>2026-02-25</lastmod>
     </url>
     <url>
          <loc>https://gmelli.github.io/intelligence-briefs/about/</loc>
-         <lastmod>2026-02-24</lastmod>
+         <lastmod>2026-02-25</lastmod>
     </url>
     <url>
          <loc>https://gmelli.github.io/intelligence-briefs/methodology/</loc>
-         <lastmod>2026-02-24</lastmod>
+         <lastmod>2026-02-25</lastmod>
     </url>
     <url>
          <loc>https://gmelli.github.io/intelligence-briefs/briefs/ai-coding/coding-pareto-frontiers-summary/</loc>
-         <lastmod>2026-02-24</lastmod>
+         <lastmod>2026-02-25</lastmod>
     </url>
     <url>
          <loc>https://gmelli.github.io/intelligence-briefs/briefs/ai-coding/coding-pareto-frontiers/</loc>
-         <lastmod>2026-02-24</lastmod>
+         <lastmod>2026-02-25</lastmod>
+    </url>
+    <url>
+         <loc>https://gmelli.github.io/intelligence-briefs/briefs/ai-learning/socratic-method-ai-software-engineering/</loc>
+         <lastmod>2026-02-25</lastmod>
+    </url>
+    <url>
+         <loc>https://gmelli.github.io/intelligence-briefs/briefs/ai-learning/socratic-method-summary/</loc>
+         <lastmod>2026-02-25</lastmod>
     </url>
 </urlset>
